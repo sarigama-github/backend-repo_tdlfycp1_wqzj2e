@@ -38,11 +38,16 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Minecraft plugin schema
+class Plugin(BaseModel):
+    """
+    Minecraft plugins portfolio items
+    Collection name: "plugin"
+    """
+    name: str = Field(..., description="Display name of the plugin")
+    description: Optional[str] = Field(None, description="Short description")
+    version: Optional[str] = Field(None, description="Plugin version, e.g., 1.20")
+    filename: str = Field(..., description="Stored file name on server")
+    original_name: str = Field(..., description="Original uploaded file name")
+    file_size: int = Field(..., ge=0, description="Size in bytes")
+    download_count: int = Field(0, ge=0, description="Number of downloads")
